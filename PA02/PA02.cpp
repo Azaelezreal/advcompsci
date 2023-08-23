@@ -1,15 +1,26 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-    ifstream myfile; myfile.open("PA02SampleFile.txt");
-    string mystring;
-    if ( myfile.is_open() ) { // always check whether the file is open
-        myfile >> mystring; // pipe file's content into stream
-        std::cout << mystring; // pipe stream's content to standard output
+    vector<int> count(10, 0);
+    std::ifstream inputFile("PA02SampleFile.txt");
+    if (!inputFile.is_open()) {
+        std::cerr << "Failed to open the file." << std::endl;
+        return 1; // or some other error code
     }
+    std::string line;
+    while (std::getline(inputFile, line)) {
+        count[stoi(line)]++;
+    }
+    inputFile.close();
+    
+    for (unsigned int i = 0; i<10; i++) {
+        cout<<i<<" "<<count.at(i)<<endl;
+    }
+
     return 0;
 }
