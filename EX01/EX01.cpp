@@ -61,5 +61,18 @@ int main(int argc, char const *argv[]) {
     //C++ does not do error checking, nor can you check for size.
 
     //Instead, you should use Vectors which are like ArrayLists
-    //Made a change
+    vector<int> lol; //vector called lol
+    lol.push_back(53); //adds 53 to the vector
+    lol.push_back(5); //adds 5 to the vector, it now holds 53, 5
+    lol.push_back(8); //adds 8 to the vector, it now holds 53, 5, 8
+    cout<<lol.at(0)<<endl; //access the item at 0. Will error check if out of bounds.
+    //cout<<lol[3]<<endl; another way to access an item. Will NOT error check
+    cout<<lol.size()<<endl; //size of the vector
+    lol.pop_back(); //get rid of the last item
+    lol[1] = 28; //changes position 2 to 28
+    lol.erase(lol.begin()+1); //removes the item at position 1
+    cout<<"the vector currently has: "<<endl;
+    for(unsigned int i = 0; i<foo.size(); i++) {
+        cout<<lol[i]<<endl;
+    }
 }
