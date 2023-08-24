@@ -9,7 +9,6 @@ int main(int argc, char const *argv[]) {
     vector<int> count(10, 0);
     string file;
     if (argc > 1) {
-        // Print the first argument
         file = argv[1];
     } else {
         cerr<< "No arguments provided." <<endl;
