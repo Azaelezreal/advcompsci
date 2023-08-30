@@ -3,6 +3,13 @@
 
 using namespace std;
 
+//structs are like classes
+//except everything is public by default and not private
+struct Table{
+    int numberofLegs;
+    bool sturdy;
+}; //need a semicolon here
+
 /*function declaration. these go at the top to make sure all the functions are usable
 even when a function is implemented below where it is called in the function. */
 int timesTwo(int num);
@@ -19,6 +26,11 @@ int main(int argc, char const *argv[]) {
 
     changeThis(x);
     cout<<"x is "<<x<<" and y is "<<y<<endl;
+
+    //This is how you create something that is a struct
+    Table lol;
+    lol.numberOfLegs = 4;
+    lol.sturdy = false; //this compiles
 
 }
 
