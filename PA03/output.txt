@@ -1,0 +1,7 @@
+Harry Potter 89 B
+Ron Weasley 78 C
+Hermione Granger 99 A
+Draco Malfoy 87 B
+Dean Thomas 97 A
+Gregory Goyle 53 F
+Ginny Weasley 92 A

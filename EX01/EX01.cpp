@@ -70,9 +70,9 @@ int main(int argc, char const *argv[]) {
     cout<<lol.size()<<endl; //size of the vector
     lol.pop_back(); //get rid of the last item
     lol[1] = 28; //changes position 2 to 28
-    lol.erase(lol.begin()+1); //removes the item at position 1
+    //lol.erase(lol.begin()+1); //removes the item at position 1
     cout<<"the vector currently has: "<<endl;
-    for(unsigned int i = 0; i<foo.size(); i++) {
+    for(unsigned int i = 0; i<=lol.size(); i++) {
         cout<<lol[i]<<endl;
     }
 }
