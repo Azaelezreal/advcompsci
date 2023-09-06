@@ -47,14 +47,14 @@ string calculateGrade (int x) {
 }
 
 void writeData(vector<string> lines, vector<string> grades, ofstream& outputFile) {
-    for (unsigned int i = 0; i<= lines.size(); i++) {
+    for (unsigned int i = 0; i< lines.size(); i++) {
         outputFile<<lines[i]<<" "<<grades[i]<<endl;
     }
 }
 
 void highestScore (vector<int> scores) {
     int high = scores[0];
-    for (unsigned int i = 0; i<= scores.size(); i++) {
+    for (unsigned int i = 0; i< scores.size(); i++) {
         if (scores[i]>high) {
             high = scores[i];
         }
@@ -90,11 +90,11 @@ int main(int argc, char const *argv[]) {
     }
 
     getData(inputFile, lines);
-    for (unsigned int i = 0; i<=lines.size(); i++) {
+    for (unsigned int i = 0; i<lines.size(); i++) {
         split (lines[i], " ", parts);
     }
 
-    for (unsigned int i = 2; i<= parts.size(); i = i+3) {
+    for (unsigned int i = 2; i< parts.size(); i = i+3) {
         string s = parts[i];
         int j = stoi(s);
         scores.push_back(j);
