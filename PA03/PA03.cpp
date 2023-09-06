@@ -83,10 +83,12 @@ int main(int argc, char const *argv[]) {
         return 2; // or some other error code
     }
 
-    ofstream outputFile(output);
-    if (!outputFile.is_open()) {
+    if (inputFile.is_open()) {
+        ofstream outputFile(output);
+        if (!outputFile.is_open()) {
         std::cerr << "Failed to open output file." << std::endl;
         return 3; // or some other error code
+    }
     }
 
     getData(inputFile, lines);
