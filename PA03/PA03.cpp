@@ -82,12 +82,6 @@ int main(int argc, char const *argv[]) {
         cerr << "Failed to open input file." << endl;
         exit(1);
     }
-
-    ofstream outputFile(output);
-    if (!outputFile.is_open()) {
-        std::cerr << "Failed to open output file." << std::endl;
-        exit(3); // or some other error code
-    }
     
 
     getData(inputFile, lines);
@@ -103,6 +97,11 @@ int main(int argc, char const *argv[]) {
     for (unsigned int i = 0; i< scores.size(); i++) {
         string g = calculateGrade(scores[i]);
         grades.push_back(g);
+    }
+    ofstream outputFile(output);
+    if (!outputFile.is_open()) {
+        std::cerr << "Failed to open output file." << std::endl;
+        exit(3); // or some other error code
     }
     
     writeData(lines, grades, outputFile);
