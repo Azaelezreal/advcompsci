@@ -74,22 +74,21 @@ int main(int argc, char const *argv[]) {
         output = argv[2];
     } else {
         cerr<< "Arguments not provided." <<endl;
-        return 1;
+        exit(1);
     }
     ifstream inputFile(input);
 
-    if (!inputFile.is_open()) {
+    if (!inputFile.good()) {
         cerr << "Failed to open input file." << endl;
-        return 2; // or some other error code
+        exit(1);
     }
 
-    if (inputFile.is_open()) {
-        ofstream outputFile(output);
-        if (!outputFile.is_open()) {
+    ofstream outputFile(output);
+    if (!outputFile.is_open()) {
         std::cerr << "Failed to open output file." << std::endl;
-        return 3; // or some other error code
+        exit(3); // or some other error code
     }
-    }
+    
 
     getData(inputFile, lines);
     for (unsigned int i = 0; i<lines.size(); i++) {
