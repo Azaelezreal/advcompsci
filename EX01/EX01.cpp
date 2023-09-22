@@ -80,3 +80,5 @@ int main(int argc, char const *argv[]) {
 //in order to submit, use "zip EX01.zip Makefile EX01.cpp"
 //the first file is what the new zip file will be called
 //the next files are what will be contained in the new zip file
+
+//wget is the command to download a website
