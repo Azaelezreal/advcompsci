@@ -2,6 +2,10 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
+#include <vector>
+
+using namespace std;
 
 // char2int
 // Converts from a character to an integer digit
@@ -41,14 +45,26 @@ char int2char(int digit){
 
 // Convert integer to string in specified base and print
 // 2 <= base <= 16
-void int2ascii(int value, int base)
-{
+void int2ascii(int value, int base) {
+    if (base == 10) {
+        cout<<value;
+        return;
+    }
+    vector<int> remainders;
+    for (int i = 0; value>0; i++) {
+        remainders.push_back(value%base);
+        value/= base;
+    }
+    for (int i = remainders.size()-1; i>=0; i--) {
+        int digit = remainders.at(i);
+        std::cout<<int2char(digit);
+    }
     return;
 }
 
 // Convert string in specified base to integer and print
 // 2 <= base <= 16
-void ascii2int(const std::string &ascii, int base)
-{
-    return;
+void ascii2int(const std::string &ascii, int base) {
+    int place = 0;
+    
 }
