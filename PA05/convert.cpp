@@ -66,5 +66,13 @@ void int2ascii(int value, int base) {
 // 2 <= base <= 16
 void ascii2int(const std::string &ascii, int base) {
     int place = 0;
-    
+    int value = stoi(ascii);
+    int newval = 0;
+    for (int i = 0; value >0; i++) {
+        place = value%10;
+        newval += place * pow(base, i);
+        value /= 10;
+    }
+    cout<<newval;
+    return;
 }
