@@ -6,9 +6,23 @@
 using namespace std;
 
 int main() {
-
-    int abc = 16;
-    cout<<int2char(abc)<<endl;
+    char abc = '0';
+    cout<<char2int(abc)<<" ";
+    cout<<char2int('1')<<" ";
+    cout<<char2int('2')<<" ";
+    cout<<char2int('3')<<" ";
+    cout<<char2int('4')<<" ";
+    cout<<char2int('5')<<" ";
+    cout<<char2int('6')<<" ";
+    cout<<char2int('7')<<" ";
+    cout<<char2int('8')<<" ";
+    cout<<char2int('9')<<" ";
+    cout<<char2int('A')<<" ";
+    cout<<char2int('B')<<" ";
+    cout<<char2int('C')<<" ";
+    cout<<char2int('D')<<" ";
+    cout<<char2int('E')<<" ";
+    cout<<char2int('F')<<" "<<endl;
 
     
     // Base 16 (hexadecimal)

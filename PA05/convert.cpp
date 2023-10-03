@@ -67,16 +67,14 @@ void int2ascii(int value, int base) {
 // 2 <= base <= 16
 void ascii2int(const std::string &ascii, int base) {
     int place = 0;
-    stringstream ss; 
-    string str = ascii;
-    int value;
-    ss << str;
-    ss >> value;
     int newval = 0;
+    int value = ascii.length();
     for (int i = 0; value >0; i++) {
-        place = char2int(value)%10;
+        string placestring = ascii.substr(value-1, 1);
+        char singleChar = placestring[0];
+        place = char2int(singleChar);
         newval += place * pow(base, i);
-        value /= 10;
+        value--;
     }
     cout<<newval;
     return;
