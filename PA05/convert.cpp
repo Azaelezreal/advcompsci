@@ -4,6 +4,7 @@
 #include <string>
 #include <cmath>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -66,10 +67,14 @@ void int2ascii(int value, int base) {
 // 2 <= base <= 16
 void ascii2int(const std::string &ascii, int base) {
     int place = 0;
-    int value = stoi(ascii);
+    stringstream ss; 
+    string str = ascii;
+    int value;
+    ss << str;
+    ss >> value;
     int newval = 0;
     for (int i = 0; value >0; i++) {
-        place = value%10;
+        place = char2int(value)%10;
         newval += place * pow(base, i);
         value /= 10;
     }
