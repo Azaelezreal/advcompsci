@@ -25,7 +25,7 @@ using namespace std;
 //0 is the LEAST significant bit
 int getBit (int value, int position) {
     string valstr = to_string(value);
-    if (valstr.substr(31 - position, 1) == "0") {
+    if (valstr.substr(valstr.length() - position, 1) == "0") {
         return 0;
     }
     return 1;
@@ -82,12 +82,45 @@ int getField (int value, int hi, int lo, int isSigned) {
     return field;
 }
 
-/** @todo Implement in field.c based on documentation contained in field.h */
+/** Change the bits of oldValue between hi and lo to the newValue,
+ * leaving the other bits unchanged.
+ * @param oldValue the original value
+ * @param hi the bit position of one end of the field
+ * @param lo the bit position of the other end of the field
+ * @param newValue the new value to put in the field (use lower bits)
+ * @return the value after replacing only the hi to low bits 
+ *         inclusive by newValue
+ */
 int setField (int oldValue, int hi, int lo, int newValue) {
-    return 0;
+    string newvalstr = to_string(newValue);
+    int ans = oldValue;
+    for (int i = 0; i<= hi-lo; i++) {
+        if (newvalstr.substr(i, 1) == "0") {
+            ans = clearBit(ans, i+lo);
+        }
+        else {
+            ans = setBit(ans, i+lo);
+        }
+    }
+    return ans;
 }
 
-/** @todo Implement in field.c based on documentation contained in field.h */
+/** Determine if a value will fit in a specified field
+ *  @param value  the source value
+ *  @param width the number of bits holding the value
+ *  @param isSigned zero means the field is unsigned, non-zero means the field is signed
+ *  @return zero if the field does NOT fit. Return 1 if the value fits.
+ */
 int fieldFits (int value, int width, int isSigned) {
-    return 0;
+    string valstr = to_string(value);
+    if (isSigned == 0) {
+        if (valstr.length()>width) {
+            return 0;
+        }
+        return 1;
+    }
+    if (valstr.length()>width-1) {
+        return 0;
+    }
+    return 1;
 }
