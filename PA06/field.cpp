@@ -25,7 +25,7 @@ using namespace std;
 //0 is the LEAST significant bit
 int getBit (int value, int position) {
     string valstr = to_string(value);
-    if (valstr.substr(valstr.length() - position, 1) == "0") {
+    if (valstr.substr(position, 1) == "0") {
         return 0;
     }
     return 1;
