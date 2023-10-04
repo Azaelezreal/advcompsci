@@ -136,7 +136,7 @@ int clearBit (int value, int position);
  *   if the field is three bits wide and unsigned, the result
  *   will be a value between 0 and 7, regardless of the actual position of the
  *   bits in value. If the value is signed, the result will be between -4 and 3.
- *   Furthermore, if the value is signed, it will be negative <b>only</b> if
+ *   Furthermore, if the value is signed, it will be negative only if
  *   the left most bit of the field is 1. In this case, the field must be
  *   sign extended (i.e. make all bits to the left 1).
  */

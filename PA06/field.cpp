@@ -48,21 +48,38 @@ int setBit (int value, int position) {
  *  @return An integer value that is the original value with the bit set to 0.
  */
 int clearBit (int value, int position) {
-    string maskstr = "";
-    for (int i = 31; i >=0; i--) {
-        if (i== position) {
-            maskstr += "0";
-        } else {
-            maskstr += "1";
-        }
-    }
-    int mask = stoi(maskstr);
-    return value & mask;
+    int mask = 1<<position;
+    mask = ~mask;
+    int ans = value & mask;
+    return ans;
 }
 
-/** @todo Implement in field.c based on documentation contained in field.h */
+/** Extract the field (possibly signed) between bits hi and lo (inclusive).
+ *  @param value  the source value or bit pattern
+ *  @param hi the bit position of one end of the field
+ *  @param lo the bit position of the other end of the field
+ *  @param isSigned zero means the field is unsigned, non-zero means the field is signed
+ *  @return The value of the field.  Sanity check example: 
+ *   if the field is three bits wide and unsigned, the result
+ *   will be a value between 0 and 7, regardless of the actual position of the
+ *   bits in value. If the value is signed, the result will be between -4 and 3.
+ *   Furthermore, if the value is signed, it will be negative only if
+ *   the left most bit of the field is 1. In this case, the field must be
+ *   sign extended (i.e. make all bits to the left 1).
+ */
 int getField (int value, int hi, int lo, int isSigned) {
-    return 0;
+    int field = value;
+    field = field>>lo;
+    if (isSigned==0 || getBit(field, hi-lo) == 0) {
+        for (int i = hi-lo+1; i<32; i++) {
+            field = clearBit(field, i);
+        }
+    } else {
+        for (int i = hi-lo+1; i<32; i++) {
+            field = setBit(field, i);
+        }
+    }
+    return field;
 }
 
 /** @todo Implement in field.c based on documentation contained in field.h */
