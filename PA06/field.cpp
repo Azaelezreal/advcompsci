@@ -1,7 +1,10 @@
 #include "field.h"
+#include <iostream>
 #include <vector>
 #include <string>
 #include <sstream>
+#include <bitset>
+#include <cmath>
 
 using namespace std;
 
@@ -24,11 +27,9 @@ using namespace std;
  */
 //0 is the LEAST significant bit
 int getBit (int value, int position) {
-    string valstr = to_string(value);
-    if (valstr.substr(position, 1) == "0") {
-        return 0;
-    }
-    return 1;
+    int newval = value>>position;
+    newval = newval & 1;
+    return newval;
 }
 
 /** Set the specified bit in a value to 1.
@@ -92,10 +93,15 @@ int getField (int value, int hi, int lo, int isSigned) {
  *         inclusive by newValue
  */
 int setField (int oldValue, int hi, int lo, int newValue) {
-    string newvalstr = to_string(newValue);
+    int newvalplace = newValue;
     int ans = oldValue;
     for (int i = 0; i<= hi-lo; i++) {
-        if (newvalstr.substr(i, 1) == "0") {
+        newvalplace = newValue;
+        if (i>0) {
+            newvalplace = newvalplace>>i;
+        }
+        newvalplace = newvalplace & 1;
+        if (newvalplace == 0) {
             ans = clearBit(ans, i+lo);
         }
         else {
@@ -112,15 +118,15 @@ int setField (int oldValue, int hi, int lo, int newValue) {
  *  @return zero if the field does NOT fit. Return 1 if the value fits.
  */
 int fieldFits (int value, int width, int isSigned) {
-    string valstr = to_string(value);
+    int max = 0;
     if (isSigned == 0) {
-        if (valstr.length()>width) {
-            return 0;
-        }
-        return 1;
+        max = pow(2, width)-1;
+        return value<=max;
     }
-    if (valstr.length()>width-1) {
-        return 0;
+    if (value>=0) {
+        max = pow(2, width-1) -1;
+        return value<=max;
     }
-    return 1;
+    int min = pow(2, width-1) *-1;
+    return value>=min;
 }
