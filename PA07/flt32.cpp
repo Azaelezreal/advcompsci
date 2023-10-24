@@ -1,5 +1,8 @@
 #include "field.h"
 #include "flt32.h"
+#include <iostream>
+
+using namespace std;
 
 /** @file flt32.c
  *  @brief You will modify this file and implement nine functions
@@ -97,8 +100,7 @@ flt32 flt32_negate(flt32 x)
  *  @return x + y. Your code needs to account for a value of 0.0, but no other
  *  special cases (e.g. infinities)
  */
-flt32 flt32_add(flt32 x, flt32 y)
-{
+flt32 flt32_add(flt32 x, flt32 y) {
     int xsign = flt32_get_sign(x);
     int ysign = flt32_get_sign(y);
     int xexp = flt32_get_exp(x) - 127;
@@ -108,27 +110,54 @@ flt32 flt32_add(flt32 x, flt32 y)
     if (xsign != ysign && flt32_abs(x) == flt32_abs(y)) {
         return 0.0;
     }
-    int ansexp = 0;
-    if (xexp > yexp) {
-        ymant = ymant >> xexp - yexp;
-        ansexp = xexp;
+    int anssign = 0;
+    while (xexp > yexp) {
+        ymant = ymant>>1;
+        yexp ++;
     }
-    else if (yexp > xexp) {
-        xmant = xmant >> yexp - xexp;
-        ansexp = yexp;
+    while (yexp > xexp) {
+        xmant = xmant>>1;
+        xexp ++;
     }
+    int ansexp = xexp;
     if (xsign == 1 && ysign != 1) {
+        if (xmant > ymant) {
+            anssign = 1;
+        }
         xmant = ~xmant + 1; //twos complement
     }
-    if (ysign == 1 && xsign != 1) {
+    else if (ysign == 1 && xsign != 1) {
+        if (ymant > xmant) {
+            anssign = 1;
+        }
         ymant = ~ymant + 1; //twos complement
     }
-    int ansmant = ymant + xmant;
-    while (flt32_left_most_1(ansmant) > 24) {
-        ansmant = ansmant<<1;
-        ansexp ++;
+    else if (ysign == 1 && xsign == 1) {
+        anssign = 1;
     }
-    return 0;
+    int ansmant = ymant + xmant;
+    //cout<<"xmantissa "<<xmant<<" + ymantissa "<<ymant<<" = "<<ansmant<<endl;
+    while (ansmant > 16777215) {
+        //cout<<"ansmant is "<<ansmant;
+        ansmant = ansmant>>1;
+        ansexp ++;
+        //cout<<" normalizing ansexp to "<<ansexp<<" and ansmant is now "<<ansmant<<endl;
+    }
+    while (ansmant < 8388608) {
+        //cout<<"ansmant is "<<ansmant;
+        ansmant = ansmant<<1;
+        ansexp--;
+        //cout<<" normalizing ansexp to "<<ansexp<<" and ansmant is now "<<ansmant<<endl;
+    }
+    ansexp += 127;
+    ansmant = clearBit(ansmant, 23);
+    int ans = setField(ansmant, 30, 23, ansexp);
+    if (anssign == 1) {
+        ans = setBit(ans, 31);
+    } else {
+        ans = clearBit(ans, 31);
+    }
+    return ans;
 }
 
 /** @todo Implement in flt32.c based on documentation contained in flt32.h */
