@@ -29,7 +29,7 @@ int main(int argc, char const *argv[]) {
 
     //This is how you create something that is a struct
     Table lol;
-    lol.numberOfLegs = 4;
+    lol.numberofLegs = 4;
     lol.sturdy = false; //this compiles
 
 }
