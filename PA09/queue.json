@@ -1,5 +1,7 @@
 [{
-    "email" : "aaaa.com",
+    "email" : null
+  }, {
+    "email" : "aaa.co",
     "firstName" : "Azael",
     "lastName" : "Mayer"
   }]
