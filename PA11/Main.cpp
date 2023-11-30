@@ -5,10 +5,12 @@ int main() {
     LinkedList* list = new LinkedList();
     // Test append, prepend, and display
     list->append(10);
+    list->append(2);
     list->prepend(5);
     list->display();
 
     // Test remove
+    /*
     list->remove(10);
     list->display();
 
@@ -19,6 +21,6 @@ int main() {
 
     //Avoid memory leaks by deleting the list.
     delete list;
-
+    */
     return 0;
 }
