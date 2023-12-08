@@ -181,8 +181,28 @@ bool LinkedList::removeHead(){
  *     multiple nodes with the same data, only the first one encountered is removed.
  */
 bool LinkedList::remove(int data) {
-    // TODO: Implement remove method
-    return false; // Placeholder return
+    //head is nullptr, returns false as there is nothing to remove.
+    if (head == nullptr) {
+        return false;
+    }
+    //head contains the data to be removed. remove head and update head pointer
+    if (head->data == data) {
+        LinkedList::removeHead();
+        return true;
+    }
+    //data in middle of list. 
+    Node* curr = head->next;
+    Node* currptr = head;
+    while (curr!=nullptr) {
+        if (curr->data == data) {
+            currptr->next = curr->next;
+            delete curr;
+            return true;
+        }
+        curr = curr->next;
+        currptr = currptr->next;
+    }
+    return false;
 }
 
 /**
@@ -208,7 +228,19 @@ bool LinkedList::remove(int data) {
  *     void: This function does not return any value.
  */
 void LinkedList::insertAfter(int after, int data) {
-    // TODO: Implement insertAfter method
+    Node* curr = head;
+    Node* afterptr = head;
+    while (curr!=nullptr) {
+        if (curr != nullptr) {
+            afterptr = curr->next;
+        }
+        if (curr->data == after) {
+            curr->next = new Node(data);
+            curr->next->next = afterptr;
+            return;
+        }
+        curr = curr->next;
+    }
 }
 
 /**
@@ -233,7 +265,13 @@ void LinkedList::insertAfter(int after, int data) {
  *     this destructor is automatically called to clean up the resources.
  */
 LinkedList::~LinkedList() {
-    // TODO: Implement the destructor to free memory
+    Node* curr = head;
+    Node* nextptr = head;
+    while (curr!=nullptr) {
+        nextptr = curr->next;
+        delete curr;
+        curr = nextptr;
+    }
 }
 
 /**
@@ -261,5 +299,26 @@ LinkedList::~LinkedList() {
  *     void: This function does not return any value.
  */
 void LinkedList::reverse() {
-    // TODO: Implement reverse method
+    Node* curr = head;
+    LinkedList* list = new LinkedList();
+    if (head == nullptr) return;
+    list->append(curr->data);
+    curr = curr->next;
+    while (curr!=nullptr) {
+        list->prepend(curr->data);
+        //remove(curr->next->data);
+        //cout<<"new list: ";
+        //list->display();
+        //cout<<"old list: ";
+        //display();
+        curr = curr->next;
+    }
+    curr = head;
+    Node* nextptr = head;
+    while (curr!=nullptr) {
+        nextptr = curr->next;
+        delete curr;
+        curr = nextptr;
+    }
+    head = list->head;
 }
